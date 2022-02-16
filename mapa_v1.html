@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+   <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body { margin:0; padding:0; } 
+      
+  h2,
+   p {
+  margin:10px;
+  }
+  h4 {
+  margin: 2px;
+  font-size: 8px;
+  }
+  h4 {
+  font-size: 11px;
+  }
+  .map-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  margin-left: 10px;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+  border-radius: 3px;
+  }
+  
+    #map { position:absolute; top:0; bottom:0; width:100%; height: 100%; }
+    
+    #features {
+    top: 10px;
+    height: 85px;
+    margin-top: 40px;
+    width: 240px;
+    }
+    #legend {
+    padding: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 18px;
+    height: 180px;
+    margin-bottom: 40px;
+    width: 220px;
+    }
+    .legend-key {
+    display: inline-block;
+    border-radius: 20%;
+    width: 20px;
+    height: 10px;
+    margin-right: 25px;
+    }
+      #features2{padding: 2px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+    line-height: 11px;
+    height: 30px;
+    margin-bottom: 45px;
+    width: 230px;} 
+    </style>
+</head> 
+<body>
+
+    <div id = 'map'></div>
+    
+    <div class="map-overlay" id="features">
+    <h2>Mapa Naval </h2>
+     <div id="pd"><p>Ciudad de Buenos Aires</p></div>
+    </div>
+    <div class="map-overlay" id="legend"></div>
+
+     <div class="map-overlay" id="features2">
+    <h4>Las líneas punteadas corresponden  a categorias anteriores a 1810 </h4>
+        
+    
+<script>
+mapboxgl.accessToken = "pk.eyJ1IjoibWFwYW5hdmFsIiwiYSI6ImNrem1xcGdqeTFkeWsydm54bHhlOTR6eDEifQ.8jaPbnMtmE_b6hBa0IZBnw";  
+const map = new mapboxgl.Map({ 
+    container: 'map', 
+    style: 'mapbox://styles/mapanaval/ckzmqyf8b000614pe6g5x6hry',  
+    center: [-58.384257, -34.620608],  
+    zoom: 11
+}); 
+
+const layers = [
+'MONUMENTOS',
+'ESPACIOS VERDES',
+'VIAS DE TRANSITO',
+'    Marinos',
+'    Civiles',
+'    Naves',
+'    Hechos',
+'    Lugares Geográficos'
+];
+const colors = [
+'#860909',
+'#698e1a',
+' ',
+'#7d62ea',
+'#dd7ae1',
+'#d15252',
+'#e48b07',
+'#927907'
+];
+
+const legend = document.getElementById('legend');
+ 
+layers.forEach((layer, i) => {
+const color = colors[i];
+const item = document.createElement('div');
+const key = document.createElement('span');
+key.className = 'legend-key';
+key.style.backgroundColor = color;
+ 
+const value = document.createElement('span');
+value.innerHTML = `${layer}`;
+item.appendChild(key);
+item.appendChild(value);
+legend.appendChild(item);
+});
+
+</script>
+</body>
+</html>
